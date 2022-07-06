@@ -1,0 +1,17 @@
+POST localhost:8080/profile/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcxMDAxMTQsImV4cCI6MTY1NzEwMzcxNCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ._iZLsLtkm_aw7U24JJrt1ohMCRg53FUrnFdD8DMmD-0
+
+{
+  "username": "lockbeck",
+  "email": "t.lochin.98@gmail.com",
+  "password": "123"
+}
+###
+POST http://localhost:8080/aut/login
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": "123"
+}
