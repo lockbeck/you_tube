@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "category")
+@Table(name = "tag")
 @NoArgsConstructor
 public class TagEntity {
 
@@ -19,7 +19,7 @@ public class TagEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String namee;
+    private String name;
     @Column
     private TagStatus status;
 

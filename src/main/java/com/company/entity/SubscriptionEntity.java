@@ -1,5 +1,7 @@
 package com.company.entity;
 
+import com.company.enums.Notification;
+import com.company.enums.SubscriptionStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,18 +12,18 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "comment")
+@Table(name = "subscription")
 @NoArgsConstructor
-public class CommentEntity {
+public class SubscriptionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, name = "created_date")
+    @Column(nullable = false, name = "subscribed_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 
-    @Column(name = "updated_date")
+    @Column(name = "unsubscribed_date")
     private LocalDateTime updatedDate;
 
     @Column(name = "profile_id",insertable = false,updatable = false)
@@ -30,23 +32,20 @@ public class CommentEntity {
     @ManyToOne(targetEntity = ProfileEntity.class, fetch = FetchType.LAZY)
     private ProfileEntity profile;
 
-    @Column(name = "video_id", insertable = false,updatable = false)
-    private String videoId;
-    @JoinColumn(nullable = false, name = "video_id")
+    @Column(name = "chanel_id", insertable = false,updatable = false)
+    private String chanelId;
+    @JoinColumn(nullable = false, name = "chanel_id")
     @ManyToOne(targetEntity = VideoEntity.class, fetch = FetchType.LAZY)
-    private VideoEntity video;
+    private ChannelEntity channel;
 
-    @JoinColumn(name = "comment_id")
-    @ManyToOne(targetEntity = CommentEntity.class, fetch = FetchType.LAZY)
-    private CommentEntity comment;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private SubscriptionStatus status;
 
-    @Column(nullable = false)
-    private String content;
-
-    @Column(nullable = false)
-    private Boolean visible = Boolean.TRUE;
-
-    public CommentEntity(Integer id) {
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Notification notification;
+    public SubscriptionEntity(Integer id) {
         this.id = id;
     }
 }

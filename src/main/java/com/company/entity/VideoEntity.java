@@ -21,9 +21,6 @@ public class VideoEntity {
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
-    @Column(nullable = false,unique = true)
-    private String key;
-
     @Column(nullable = false)
     private String name;
 
@@ -67,11 +64,11 @@ public class VideoEntity {
     private Boolean visible = Boolean.TRUE;
 
 
-    @Column(nullable = false, name = "like_count")
-    private Integer likeCount = 0;
-
-    @Column(nullable = false, name = "dislike_count")
-    private Integer disLikeCount = 0;
+//    @Column(nullable = false, name = "like_count")
+//    private Integer likeCount = 0;
+//
+//    @Column(nullable = false, name = "dislike_count")
+//    private Integer disLikeCount = 0;
 
 
 

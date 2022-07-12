@@ -21,7 +21,7 @@ public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String namee;
+    private String name;
     @Column
     private CategoryStatus status;
 

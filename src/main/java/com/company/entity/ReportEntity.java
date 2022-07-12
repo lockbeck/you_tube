@@ -1,5 +1,6 @@
 package com.company.entity;
 
+import com.company.enums.ReportType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,9 +11,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "comment")
+@Table(name = "report")
 @NoArgsConstructor
-public class CommentEntity {
+public class ReportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,32 +22,23 @@ public class CommentEntity {
     @Column(nullable = false, name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 
-    @Column(name = "updated_date")
-    private LocalDateTime updatedDate;
-
     @Column(name = "profile_id",insertable = false,updatable = false)
     private Integer profileId;
     @JoinColumn(nullable = false, name = "profile_id")
     @ManyToOne(targetEntity = ProfileEntity.class, fetch = FetchType.LAZY)
     private ProfileEntity profile;
 
-    @Column(name = "video_id", insertable = false,updatable = false)
-    private String videoId;
-    @JoinColumn(nullable = false, name = "video_id")
-    @ManyToOne(targetEntity = VideoEntity.class, fetch = FetchType.LAZY)
-    private VideoEntity video;
-
-    @JoinColumn(name = "comment_id")
-    @ManyToOne(targetEntity = CommentEntity.class, fetch = FetchType.LAZY)
-    private CommentEntity comment;
+    @Column(name = "entity_id",nullable = false)
+    private String entityId;
 
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    private Boolean visible = Boolean.TRUE;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private ReportType type;
 
-    public CommentEntity(Integer id) {
+    public ReportEntity(Integer id) {
         this.id = id;
     }
 }
