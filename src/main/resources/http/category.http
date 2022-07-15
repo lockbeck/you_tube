@@ -1,0 +1,24 @@
+POST http://localhost:8080/category/adm/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MDg2NjUsImV4cCI6MTY1NzkxMjI2NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.Olt5zzmzl8ZdXQQ9PplwhH5j95k5rb-axE6_kc5qbLc
+Content-Type: application/json
+
+{
+  "name" : "update1"
+}
+
+###
+
+PUT http://localhost:8080/category/adm/update/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MDg2NjUsImV4cCI6MTY1NzkxMjI2NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.Olt5zzmzl8ZdXQQ9PplwhH5j95k5rb-axE6_kc5qbLc
+Content-Type: application/json
+
+{
+"name": "update1"
+}
+
+###
+DELETE http://localhost:8080/category/adm/delete/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MDg2NjUsImV4cCI6MTY1NzkxMjI2NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.Olt5zzmzl8ZdXQQ9PplwhH5j95k5rb-axE6_kc5qbLc
+
+###
+GET http://localhost:8080/category/public/getAll

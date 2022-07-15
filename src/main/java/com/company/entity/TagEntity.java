@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,9 +22,14 @@ public class TagEntity {
     private Integer id;
     @Column
     private String name;
-    @Column
-    private TagStatus status;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private TagStatus status = TagStatus.ACTIVE;
 
     @Column
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
+
+    public TagEntity(String name) {
+        this.name = name;
+    }
 }

@@ -1,7 +1,6 @@
 package com.company.controller;
 
-import com.company.dto.ProfileDTO;
-import com.company.dto.RegistrationDTO;
+import com.company.dto.profile.ProfileDTO;
 import com.company.service.ProfileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +24,14 @@ public class ProfileController {
     @ApiOperation(value = "Create", notes = "Method to create profile(only ADMIN)")
     @PostMapping("/create")
     public ResponseEntity<?> registration(@RequestBody @Valid ProfileDTO dto) {
+        log.info("Request for registration{}", dto);
+        ProfileDTO profileDTO = profileService.create(dto);
+        return ResponseEntity.ok(profileDTO);
+    }
+
+    @ApiOperation(value = "Change password", notes = "Method to change password(only ADMIN)")
+    @PostMapping("/changePass")
+    public ResponseEntity<?> changePass(@RequestBody @Valid ProfileDTO dto) {
         log.info("Request for registration{}", dto);
         ProfileDTO profileDTO = profileService.create(dto);
         return ResponseEntity.ok(profileDTO);

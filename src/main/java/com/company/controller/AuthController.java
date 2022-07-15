@@ -1,7 +1,8 @@
 package com.company.controller;
 
-import com.company.dto.ProfileDTO;
-import com.company.dto.RegistrationDTO;
+import com.company.dto.profile.LoginDTO;
+import com.company.dto.profile.ProfileDTO;
+import com.company.dto.profile.RegistrationDTO;
 import com.company.dto.ResponseInfoDTO;
 import com.company.service.AuthService;
 import com.company.util.JwtUtil;
@@ -38,7 +39,7 @@ public class AuthController {
 
     @ApiOperation(value = "Login", notes = "Method to login ")
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid ProfileDTO dto) {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginDTO dto) {
         log.info("Request for login {}", dto);
         ProfileDTO profileDTO = authService.login(dto);
         return ResponseEntity.ok(profileDTO);

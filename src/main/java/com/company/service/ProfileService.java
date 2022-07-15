@@ -1,7 +1,7 @@
 package com.company.service;
 
-import com.company.dto.ProfileDTO;
-import com.company.entity.AttachEntity;
+import com.company.config.CustomUserDetails;
+import com.company.dto.profile.ProfileDTO;
 import com.company.entity.ProfileEntity;
 import com.company.enums.ProfileStatus;
 import com.company.exp.BadRequestException;
@@ -9,6 +9,8 @@ import com.company.exp.ItemNotFoundException;
 import com.company.repository.ProfileRepository;
 import com.company.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -75,4 +77,11 @@ public class ProfileService {
             throw new ItemNotFoundException("Profile not found");
         });
     }
+
+    public ProfileEntity getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        return principal.getProfile();
+    }
+
 }

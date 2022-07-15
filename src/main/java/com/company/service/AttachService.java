@@ -53,6 +53,7 @@ public class AttachService {
             Path path = Paths.get(attachFolder + pathFolder + "/" + fileName);
             Files.write(path, bytes);
             AttachEntity entity = new AttachEntity();
+            System.out.println(uuid);
             entity.setId(uuid);
             entity.setOriginalName(file.getOriginalFilename());
             entity.setExtension(extension);
@@ -83,7 +84,7 @@ public class AttachService {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
-            ImageIO.write(originalImage, "png", baos);
+            ImageIO.write(originalImage, "jpgt", baos);
             baos.flush();
             imageInByte = baos.toByteArray();
             baos.close();
@@ -192,5 +193,11 @@ public class AttachService {
     }
     public String getFileFullPath(AttachEntity entity) {
         return attachFolder + entity.getPath() + "/" + entity.getId() + "." + entity.getExtension();
+    }
+    public String getImageUrl(String id){
+
+        String url = serverUrl+"attach/open_general/"+id;
+        System.out.println(url);
+        return null;
     }
 }

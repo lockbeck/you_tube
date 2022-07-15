@@ -1,0 +1,23 @@
+POST http://localhost:8080/tag/public/create
+Content-Type: application/json
+
+{
+  "name" : "#pubg"
+}
+
+###
+
+PUT http://localhost:8080/tag/adm/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MDg2NjUsImV4cCI6MTY1NzkxMjI2NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.Olt5zzmzl8ZdXQQ9PplwhH5j95k5rb-axE6_kc5qbLc
+Content-Type: application/json
+
+{
+  "id": 5,
+  "name": "#update"
+}
+
+###
+DELETE http://localhost:8080/tag/adm/delete/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MDg2NjUsImV4cCI6MTY1NzkxMjI2NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.Olt5zzmzl8ZdXQQ9PplwhH5j95k5rb-axE6_kc5qbLc
+###
+GET http://localhost:8080/tag/public/getAll

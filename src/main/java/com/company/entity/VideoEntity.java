@@ -3,6 +3,7 @@ package com.company.entity;
 import com.company.enums.VideoStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "video")
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 public class VideoEntity {
 
     @Id
@@ -63,8 +65,11 @@ public class VideoEntity {
     @Column
     private Boolean visible = Boolean.TRUE;
 
+    public VideoEntity(String id) {
+        this.id = id;
+    }
 
-//    @Column(nullable = false, name = "like_count")
+    //    @Column(nullable = false, name = "like_count")
 //    private Integer likeCount = 0;
 //
 //    @Column(nullable = false, name = "dislike_count")

@@ -17,8 +17,6 @@ import java.time.LocalDateTime;
 public class AttachEntity {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
     @Column
     private String originalName;
@@ -31,4 +29,8 @@ public class AttachEntity {
 
     @Column
     private LocalDateTime createdDate=LocalDateTime.now();
+
+    public AttachEntity(String id) {
+        this.id = id;
+    }
 }

@@ -1,8 +1,9 @@
 package com.company.service;
 
 import com.company.config.CustomUserDetails;
-import com.company.dto.ProfileDTO;
-import com.company.dto.RegistrationDTO;
+import com.company.dto.profile.LoginDTO;
+import com.company.dto.profile.ProfileDTO;
+import com.company.dto.profile.RegistrationDTO;
 import com.company.dto.ResponseInfoDTO;
 import com.company.entity.EmailHistoryEntity;
 import com.company.entity.ProfileEntity;
@@ -75,11 +76,14 @@ public class AuthService {
 
     }
 
-    public ProfileDTO login(ProfileDTO dto) {
+    public ProfileDTO login(LoginDTO dto) {
         Authentication authenticate = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
         CustomUserDetails user = (CustomUserDetails) authenticate.getPrincipal();
         ProfileEntity profile = user.getProfile();
+        if (profile.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
+            throw new BadRequestException("Profile is not ACTIVE");
+        }
 
        /* Optional<ProfileEntity> optional = profileRepository.findByEmail(authDTO.getEmail());
         if (optional.isEmpty()) {
@@ -138,7 +142,7 @@ public class AuthService {
 
         ProfileEntity entity = byEmail.get();
         if (entity.getStatus().equals(ProfileStatus.ACTIVE)) {
-            throw new BadRequestException("User has already verified by email");
+            throw new BadRequestException("User has already been verified by email");
         }
         Long count = emailService.getCountByEmail(email);
         if (count >= 3) {

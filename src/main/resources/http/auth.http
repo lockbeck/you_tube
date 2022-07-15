@@ -1,9 +1,9 @@
-POST localhost:8080/auth/registration
+POST localhost:8081/auth/registration
 Content-Type: application/json
 
 {
-  "username": "lockbeck",
-  "email": "t.lochin.98@gmail.com",
+  "username": "lockbeck1",
+  "email": "1t.lochin.98@gmail.com",
   "password": "123"
 }
 

@@ -42,8 +42,7 @@ public class AttachController {
     @GetMapping(value = "/open_general/{id}", produces = MediaType.ALL_VALUE)
     public byte[] open_general(@PathVariable("id") String fileName) {
         log.info("Request for open_general media {}",fileName);
-        return attachService.
-                open_general2(fileName);
+        return attachService.loadImage(fileName);
     }
 
     @GetMapping("/download/{fileName}")

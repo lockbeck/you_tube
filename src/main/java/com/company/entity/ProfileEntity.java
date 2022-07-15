@@ -42,4 +42,8 @@ public class ProfileEntity {
     @OneToOne
     @JoinColumn(name = "image_id")
     private AttachEntity image;
+
+    public ProfileEntity(Integer id) {
+        this.id = id;
+    }
 }

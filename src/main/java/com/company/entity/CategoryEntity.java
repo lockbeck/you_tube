@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Getter
@@ -22,9 +23,13 @@ public class CategoryEntity {
     private Integer id;
     @Column
     private String name;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private CategoryStatus status = CategoryStatus.ACTIVE;
     @Column
-    private CategoryStatus status;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
-    @Column
-    private LocalDateTime createdDate;
+    public CategoryEntity(String name) {
+        this.name = name;
+    }
 }
