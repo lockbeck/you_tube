@@ -219,7 +219,15 @@ public class AttachService {
         dto.setOriginalName(entity.getOriginalName());
 
         return dto;
+    }public  AttachDTO getAttachDTOIdUrl(String id){
+        AttachEntity entity = get(id);
+
+        AttachDTO dto= new AttachDTO();
+        dto.setUrl(getImageUrl(id));
+        dto.setId(id);
+        return dto;
     }
+
     public String getIdFromFileName(String fileName){
         int lastIndexOf = fileName.lastIndexOf(".");
         return fileName.substring(0, lastIndexOf);

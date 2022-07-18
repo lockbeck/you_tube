@@ -32,4 +32,8 @@ public class CategoryEntity {
     public CategoryEntity(String name) {
         this.name = name;
     }
+
+    public CategoryEntity(Integer id) {
+        this.id = id;
+    }
 }

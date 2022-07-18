@@ -53,4 +53,12 @@ public class SubscriptionController {
         List<SubscriptionDTO> response = subscribtionService.getSubsList();
         return ResponseEntity.ok(response);
     }
+
+    @ApiOperation(value = "Get subscription list for Admin ", notes = "API to get subscription list for admin")
+    @PutMapping("/public/getList/{profileId}")
+    public ResponseEntity<?> getListForAdmin(@PathVariable("profileId") Integer profileId){
+        log.info("Request to get subscription list for admin");
+        List<SubscriptionDTO> response = subscribtionService.getSubsListForAdmin(profileId);
+        return ResponseEntity.ok(response);
+    }
 }

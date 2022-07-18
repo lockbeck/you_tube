@@ -94,4 +94,30 @@ public class SubscriptionService {
         });
         return dtoList;
     }
+    public List<SubscriptionDTO> getSubsListForAdmin(Integer profileId) {
+        List<SubscriptionInfo> infoList = subscriptionRepository.findByProfileIdForAdmin
+                (SubscriptionStatus.SUBSCRIBED, profileId);
+
+        List<SubscriptionDTO> dtoList= new LinkedList<>();
+        infoList.forEach(subscriptionInfo -> {
+            SubscriptionDTO dto = new SubscriptionDTO();
+            dto.setId(subscriptionInfo.getSubscriptionId());
+            dto.setNotification(subscriptionInfo.getNotification());
+            dto.setCreatedDate(subscriptionInfo.getCreatedDate());
+
+            ChannelDTO channelDTO = new ChannelDTO();
+            channelDTO.setId(subscriptionInfo.getChannelId());
+            channelDTO.setName(subscriptionInfo.getChannelName());
+
+            AttachDTO attachDTO = new AttachDTO();
+            attachDTO.setId(subscriptionInfo.getChannelPhotoId());
+            attachDTO.setUrl(attachService.getImageUrl(subscriptionInfo.getChannelPhotoId()));
+            channelDTO.setPhoto(attachDTO);
+
+            dto.setChannel(channelDTO);
+
+            dtoList.add(dto);
+        });
+        return dtoList;
+    }
 }

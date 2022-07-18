@@ -1,17 +1,16 @@
 package com.company.dto.playlist;
 
 import com.company.dto.AttachDTO;
+import com.company.dto.video.VideoDTO;
 import com.company.dto.channel.ChannelDTO;
-import com.company.entity.AttachEntity;
-import com.company.entity.ChannelEntity;
 import com.company.enums.PlayListStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,9 +25,12 @@ public class PlaylistDTO {
     private String attachId;
     private String channelId;
     private PlayListStatus status;
-
+    private List<VideoDTO> videoList;
     private LocalDateTime createdDate;
     private Boolean visible;
     private AttachDTO photo;
     private ChannelDTO chanel;
+
+    private Integer numOfVideos;
+    private Integer totalView;
 }

@@ -4,19 +4,18 @@ import java.time.LocalDateTime;
 
 public interface PlaylistInfo {
     String getPlaylistId();
-
     String getPlaylistName();
-
     String getPlaylistDescription();
-
     String getPlaylistStatus();
-
-    String getPlaylistOrderNum();
+    Integer getPlaylistOrderNum();
 
     String getChannelId();
-
     String getChannelName();
     String getChannelPhotoId();
-    String getChannelPhotoUrl();
+
+    Integer getProfileId();
+    String getProfileUsername();
+    String getProfilePhotoId();
+
 
 }

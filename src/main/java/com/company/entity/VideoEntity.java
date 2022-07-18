@@ -33,11 +33,13 @@ public class VideoEntity {
     @Enumerated(EnumType.STRING)
     private VideoStatus status;
 
-    @Column(nullable = false, name = "view_count")
+    @Column(name = "view_count")
     private Integer viewCount = 0;
 
-    @Column(nullable = false, name = "shared_count")
+    @Column(name = "shared_count")
     private Integer sharedCount = 0;
+    @Column
+    private Long duration;
 
     @JoinColumn(name = "preview_image_id")
     @OneToOne(fetch = FetchType.LAZY)

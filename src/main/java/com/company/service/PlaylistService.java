@@ -1,9 +1,12 @@
 package com.company.service;
 
+import com.company.dto.AttachDTO;
+import com.company.dto.VideoLikeDTO;
 import com.company.dto.channel.ChannelCreateUpdateDTO;
 import com.company.dto.channel.ChannelDTO;
 import com.company.dto.playlist.PlaylistCreateUpdateDTO;
 import com.company.dto.playlist.PlaylistDTO;
+import com.company.dto.profile.ProfileDTO;
 import com.company.entity.AttachEntity;
 import com.company.entity.ChannelEntity;
 import com.company.entity.PlayListEntity;
@@ -13,6 +16,8 @@ import com.company.enums.ProfileRole;
 import com.company.exp.BadRequestException;
 import com.company.exp.ItemNotFoundException;
 import com.company.exp.NoPermissionException;
+import com.company.mapper.PlaylistInfo;
+import com.company.mapper.PlaylistShortInfo;
 import com.company.repository.ChannelRepository;
 import com.company.repository.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,37 +135,58 @@ public class PlaylistService {
 
     }
 
-    public List<PlayListEntity> getProfilePlaylist(Integer profileID) {
-return null;
+    public List<PlaylistDTO> getProfilePlaylist(Integer profileID) {
+        List<PlaylistShortInfo> listInfo = playlistRepository.getProfilePlayLists(profileID);
+
+
+        List<PlaylistDTO> dtoList = new LinkedList<>();
+        listInfo.forEach(playlistInfo -> {
+            PlaylistDTO dto = new PlaylistDTO();
+            dto.setId(playlistInfo.getPlaylistId());
+            dto.setName(playlistInfo.getPlaylistName());
+            dto.setCreatedDate(playlistInfo.getPlaylistCreatedDate());
+
+            ChannelDTO channelDTO = new ChannelDTO();
+            channelDTO.setId(playlistInfo.getChannelId());
+            channelDTO.setName(playlistInfo.getChannelName());
+            dto.setChanel(channelDTO);
+
+            dto.setNumOfVideos(playlistInfo.getCountVideo());
+            dto.setTotalView(playlistInfo.getTotalWatchedCount());
+
+            dtoList.add(dto);
+
+        });
+        return dtoList;
     }
 
-//    public List<PlaylistDTO> getPlaylistByProfileId(Integer profileId) {
-//        playlistRepository.getProfilePlayListsForAdmin( profileId);
-//        profileService.getProfileInfo(profileId);
-//    }
+    public List<PlaylistDTO> getPlaylistByProfileId(Integer profileID) {
+        List<PlaylistInfo> listInfo = playlistRepository.getPlaylistByProfileId(profileID);
 
+        List<PlaylistDTO> dtoList = new LinkedList<>();
+        listInfo.forEach(playlistInfo -> {
+            PlaylistDTO dto = new PlaylistDTO();
+            dto.setId(playlistInfo.getPlaylistId());
+            dto.setName(playlistInfo.getPlaylistName());
+            dto.setDescription(playlistInfo.getPlaylistDescription());
+            dto.setOrderNumber(playlistInfo.getPlaylistOrderNum());
 
-//    public List<ChannelDTO> getUserChannelList() {
-//        Integer id = profileService.getCurrentUser().getId();
-//
-//        List<ChannelDTO> dtoList = new LinkedList<>();
-//        List<ChannelEntity> byProfile_id = playlistRepository.findByProfile_Id(id);
-//        byProfile_id.forEach(entity -> {
-//
-//                    ChannelDTO dto = new ChannelDTO();
-//                    dto.setName(entity.getName());
-//                    dto.setDescription(entity.getDescription());
-//                    dto.setCreatedDate(entity.getCreatedDate());
-//                    if (entity.getPhoto() != null) {
-//                        dto.setPhoto(attachService.getDto(entity.getId()));
-//                    }
-//                    if (entity.getBanner() != null) {
-//                        dto.setBanner(attachService.getDto(entity.getId()));
-//                    }
-//                    dto.setName(entity.getName());
-//                    dtoList.add(dto);
-//                }
-//        );
-//        return dtoList;
-//    }
+            ChannelDTO channelDTO = new ChannelDTO();
+            channelDTO.setId(playlistInfo.getChannelId());
+            channelDTO.setName(playlistInfo.getChannelName());
+            channelDTO.setPhoto(new AttachDTO(playlistInfo.getChannelId(),attachService.getImageUrl(playlistInfo.getChannelPhotoId())));
+
+            ProfileDTO profileDTO = new ProfileDTO();
+            profileDTO.setId(playlistInfo.getProfileId());
+            profileDTO.setUsername(playlistInfo.getProfileUsername());
+            profileDTO.setImage(new AttachDTO(playlistInfo.getProfilePhotoId(), attachService.getImageUrl(playlistInfo.getProfilePhotoId())));
+            channelDTO.setProfile(profileDTO);
+            dto.setChanel(channelDTO);
+
+            dtoList.add(dto);
+
+        });
+        return dtoList;
+    }
+
 }

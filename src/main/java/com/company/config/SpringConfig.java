@@ -59,6 +59,7 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/profile/adm/*").hasRole( "ADMIN")
                 .antMatchers( "/profile/public/*").hasAnyRole("ADMIN","OWNER","PROFILE")
                 .antMatchers( "/channel/public/*").hasAnyRole("ADMIN","OWNER","PROFILE")
+                .antMatchers( "/video/public/*").hasAnyRole("ADMIN","OWNER","PROFILE")
                 .antMatchers("/admin", "/admin/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

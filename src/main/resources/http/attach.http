@@ -2,9 +2,9 @@ POST http://localhost:8080/attach/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="newPhoto.jpg"
+Content-Disposition: form-data; name="file"; filename="video.mp4"
 
-< C:\Users\mjava\Desktop\earth.jpg
+< C:\Users\mjava\Desktop\videoplayback.mp4
 ###
 GET http://localhost:8080/attach/open_general/95db2af7-6378-4973-a3d2-80b8f9e766ea
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2MTMyNjYsImV4cCI6MTY1NzYxNjg2NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.XYCUCOyAa9xqdheCCvRVf8U5cliMpbqauM0f9Ind1KY

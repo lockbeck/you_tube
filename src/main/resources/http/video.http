@@ -1,0 +1,32 @@
+POST http://localhost:8080/video/public/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgxMzkzMzgsImV4cCI6MTY1ODE0MjkzOCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjo3fQ.McEtkGrTcbHiGZgJDIZqeNLye2ey3Ta2dO4sklkvPCk
+Content-Type: application/json
+
+{
+  "name": "video1",
+  "description": "video1",
+  "status": "PRIVATE",
+  "imageId": "4e59ab72-c306-4fef-9fa8-4096d2c9d927",
+  "attachId": "23218e3e-efb3-47c6-bc22-8600416bbe7b",
+  "channelId": "4028e4b8820438690182043be3570000",
+  "categoryId": "2022-07-15 23:12:53.427102"
+}
+
+###
+
+PUT http://localhost:8080/channel/public/update/4028e4b882043cee0182043d49b10000
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MjgzOTYsImV4cCI6MTY1NzkzMTk5NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjo3fQ.e5bqHXXTiWsGKYjXUU9yL6AOvSVdsI9YCiarI5aGe5A
+Content-Type: application/json
+
+{
+  "name": "pubg",
+  "description": "zor kanal",
+  "photoId": "60789089-5478-43fd-a929-7cff8b9b1e3d"
+}
+
+###
+DELETE http://localhost:8080/category/adm/delete/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MDg2NjUsImV4cCI6MTY1NzkxMjI2NSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.Olt5zzmzl8ZdXQQ9PplwhH5j95k5rb-axE6_kc5qbLc
+
+###
+GET http://localhost:8080/category/public/getAll

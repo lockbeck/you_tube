@@ -70,21 +70,22 @@ public class PlaylistController {
         return ResponseEntity.ok(response);
     }
 
-//    @ApiOperation(value = "Get playlist by userid", notes = "Method to get playlist by user id(ADMIN)")
-//    @GetMapping("/adm/getPlaylistByProfileId/{profileId}")
-//    public ResponseEntity<?> getPlaylistByProfileId(@PathVariable ("profileId") Integer profileID) {
-//        log.info("Request to get channel");
-//        playlistService.getPlaylistByProfileId(profileID);
-//        return ResponseEntity.ok(response);
-//    }
+    @ApiOperation(value = "Get playlist by userid", notes = "Method to get playlist by user id(ADMIN)")
+    @GetMapping("/adm/getPlaylistByProfileId/{profileId}")
+    public ResponseEntity<?> getPlaylistByProfileId(@PathVariable ("profileId") Integer profileID) {
+        log.info("Request to get channel");
+        List<PlaylistDTO> response = playlistService.getPlaylistByProfileId(profileID);
+        return ResponseEntity.ok(response);
+    }
 //
-//    @ApiOperation(value = "Get playlist by userid for user", notes = "Method to get playlist by user id(USER)")
-//    @GetMapping("/adm/getProfilePlaylist/{profileId}")
-//    public ResponseEntity<?> getProfilePlaylist(@PathVariable ("profileId") Integer profileID) {
-//        log.info("Request to get channel");
-//        playlistService.getProfilePlaylist(profileID);
-//        return ResponseEntity.ok(response);
-//    }
+    @ApiOperation(value = "Get playlist by userid for user", notes = "Method to get playlist by user id(USER)")
+    @GetMapping("/adm/getProfilePlaylist/{profileId}")
+    public ResponseEntity<?> getProfilePlaylist(@PathVariable ("profileId") Integer profileID) {
+        log.info("Request to get channel");
+        List<PlaylistDTO> response = playlistService.getProfilePlaylist(profileID);
+        return ResponseEntity.ok(response);
+    }
+
 
 
 }

@@ -2,6 +2,7 @@ package com.company.repository;
 
 import com.company.entity.ChannelEntity;
 import com.company.entity.PlayListEntity;
+import com.company.entity.ProfileEntity;
 import com.company.mapper.CustomPlaylistRepository;
 import com.company.mapper.PlaylistInfo;
 import com.company.mapper.PlaylistShortInfo;
@@ -24,26 +25,11 @@ public interface PlaylistRepository extends PagingAndSortingRepository<PlayListE
 //            "offset :offset", nativeQuery = true)
 //    List<PlayListEntity> pagination(@Param("limit") Integer limit, @Param("offset") Integer offset);
 //
-////    id, name,created_date,channel(id,name),video_count,video_list[{id,name,key,duration}] (first 2)
-//@Query(value = "SELECT p.id as playlistId, p.name as playListName, p.description as playListDescription, " +
-//        "      c.id as channleId, c.name as channelName, " +
-//        "     from  playlist as p " +
-//        " inner JOIN channel as c on p.channel_id = c.id " +
-//        "     where c.profile_id =:profileId " +
-//        "     and c.visible = true and p.visible = true ", nativeQuery = true)
-//List<PlaylistInfo> getProfilePlayListsForAdmin(@Param("profileId") Integer profileId);
+
 //
 //
 //
-//    @Query(value = "SELECT p.id as playlistId, p.name as playListName, p.created_date as playListCreatedDate, " +
-//            "      c.uuid as channleId, c.name as channelName, " +
-//            " (select count(*) from playlist_video  as pv where pv.playlist_id = p.uuid ) as countVideo " +
-//            "     from  playlist as p " +
-//            " inner JOIN channel as c on p.channel_id = c.uuid " +
-//            "     where c.profile_id =:profileId " +
-//            "     and c.visible = true and p.visible = true " +
-//            "order by p.ord", nativeQuery = true)
-//    List<PlaylistShortInfo> getProfilePlayLists(@Param("profileId") Integer profileId);
+
 //
 //
 //    @Query(value = "SELECT p.uuid as playlistId, p.name as playListName, p.created_date as playListCreatedDate, " +
@@ -102,5 +88,24 @@ public interface PlaylistRepository extends PagingAndSortingRepository<PlayListE
     void updatePhotoById(String profileId, String photoId);
 
     Optional<ChannelEntity> findByName(String name);
+
+    @Query(value = " select p.id as playlistId p.name as playlistName, p.description as playlistDescription, " +
+            " p.status as playlistStatus, p.order_number as playlistOrderNum , " +
+            " c.name as channelName , c.id as channelId , c.photo-id as channelPhotoId," +
+            " pr.id as profileId , pr.username as profileUsername, pr.image_id as profilePhotoId " +
+            " from playlist as p " +
+            " inner join channel as c on c.id = p.channel_id" +
+            " inner join profile as pr on pr.id = c.profile_id",nativeQuery = true)
+    List<PlaylistInfo> getPlaylistByProfileId(Integer profileID);
+
+    @Query(value = "SELECT p.id as playlistId, p.name as playListName, p.created_date as playListCreatedDate, " +
+            "      c.id as channleId, c.name as channelName, " +
+            " (select count(*) from playlist_video  as pv where pv.playlist_id = p.id ) as countVideo " +
+            "     from  playlist as p " +
+            " inner JOIN channel as c on p.channel_id = c.uuid " +
+            "     where c.profile_id =:profileId " +
+            "     and c.visible = true and p.visible = true " +
+            "order by p.ord", nativeQuery = true)
+    List<PlaylistShortInfo> getProfilePlayLists(@Param("profileId") Integer profileId);
 
 }
