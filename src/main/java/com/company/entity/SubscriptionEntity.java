@@ -20,10 +20,10 @@ public class SubscriptionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, name = "subscribed_date")
-    private LocalDateTime createdDate = LocalDateTime.now();
+    @Column(nullable = false, name = "created_date")
+    private LocalDateTime createdDate;
 
-    @Column(name = "unsubscribed_date")
+    @Column(name = "updated_date")
     private LocalDateTime updatedDate;
 
     @Column(name = "profile_id",insertable = false,updatable = false)
@@ -32,9 +32,9 @@ public class SubscriptionEntity {
     @ManyToOne(targetEntity = ProfileEntity.class, fetch = FetchType.LAZY)
     private ProfileEntity profile;
 
-    @Column(name = "chanel_id", insertable = false,updatable = false)
-    private String chanelId;
-    @JoinColumn(nullable = false, name = "chanel_id")
+    @Column(name = "channel_id", insertable = false,updatable = false)
+    private String channelId;
+    @JoinColumn(nullable = false, name = "channel_id")
     @ManyToOne(targetEntity = VideoEntity.class, fetch = FetchType.LAZY)
     private ChannelEntity channel;
 

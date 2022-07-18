@@ -12,8 +12,8 @@ POST localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "username": "Adminjon",
-  "password": "123"
+  "username": "lock",
+  "password": "333"
 }
 
 ###

@@ -11,7 +11,8 @@ class YouTubeApplicationTests {
 private AttachService attachService;
     @Test
     void contextLoads() {
-        attachService.getImageUrl("sdfbfadvdv");
+        String imageUrl = attachService.getImageUrl("ee405052-e34f-4c84-92fe-8423300c2941");
+        System.out.println(imageUrl);
     }
 
 }

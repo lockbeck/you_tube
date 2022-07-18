@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Calendar;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class AttachService {
@@ -34,7 +33,31 @@ public class AttachService {
     private String attachFolder;
     @Value("${server.url}")
     private String serverUrl;
-    public AttachDTO saveToSystem(MultipartFile file) {
+    /*
+        public String saveToSystem(MultipartFile file) {
+            try {
+                // zari.jpg
+                // asdas-dasdas-dasdasd-adadsd.jpg
+                String pathFolder = getYmDString();
+                String uuid = UUID.randomUUID().toString();
+                String extension = getExtension(file.getOriginalFilename());
+                String fileName = uuid + "." + extension;
+                File folder = new File( attachFolder+pathFolder );
+                if (!folder.exists()) {
+                    folder.mkdirs();
+                }
+                byte[] bytes = file.getBytes();
+                String replace = pathFolder.replace("/", "_");
+                Path path = Paths.get(attachFolder+pathFolder+"/" +replace+"_"+fileName);
+                Files.write(path, bytes);
+                return fileName;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    */
+    public  AttachDTO saveToSystem(MultipartFile file) {
         try {
             // zari.jpg
             String pathFolder = getYmDString(); // 2022/06/20
@@ -53,7 +76,6 @@ public class AttachService {
             Path path = Paths.get(attachFolder + pathFolder + "/" + fileName);
             Files.write(path, bytes);
             AttachEntity entity = new AttachEntity();
-            System.out.println(uuid);
             entity.setId(uuid);
             entity.setOriginalName(file.getOriginalFilename());
             entity.setExtension(extension);
@@ -62,7 +84,7 @@ public class AttachService {
             attachRepository.save(entity);
 
             AttachDTO dto = new AttachDTO();
-            dto.setUrl(serverUrl +"attach/open_general/"+entity.getId());
+            dto.setUrl(serverUrl +"attach/open/"+entity.getId());
             return dto;
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,7 +106,7 @@ public class AttachService {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
-            ImageIO.write(originalImage, "jpgt", baos);
+            ImageIO.write(originalImage, "png", baos);
             baos.flush();
             imageInByte = baos.toByteArray();
             baos.close();
@@ -187,6 +209,17 @@ public class AttachService {
         } );
 
     }
+
+    public  AttachDTO getDto(String id){
+        AttachEntity entity = get(id);
+
+        AttachDTO dto= new AttachDTO();
+        dto.setUrl(getImageUrl(id));
+        dto.setId(id);
+        dto.setOriginalName(entity.getOriginalName());
+
+        return dto;
+    }
     public String getIdFromFileName(String fileName){
         int lastIndexOf = fileName.lastIndexOf(".");
         return fileName.substring(0, lastIndexOf);
@@ -194,10 +227,28 @@ public class AttachService {
     public String getFileFullPath(AttachEntity entity) {
         return attachFolder + entity.getPath() + "/" + entity.getId() + "." + entity.getExtension();
     }
-    public String getImageUrl(String id){
 
-        String url = serverUrl+"attach/open_general/"+id;
-        System.out.println(url);
-        return null;
+    public String getImageUrl(String id) {
+//        http://localhost:8080/attach/open/ee405052-e34f-4c84-92fe-8423300c2941
+        String url = String.format("%sattach/open/%s", serverUrl, id);
+        return url;
+    }
+
+    public PageImpl getAll(int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "createdDate");
+        Pageable pageable= PageRequest.of(page,size,sort);
+        Page<AttachEntity> all = attachRepository.findAll(pageable);
+        List<AttachDTO> dtoList= new LinkedList<>();
+        all.forEach(entity -> {
+            AttachDTO dto = new AttachDTO();
+            dto.setId(entity.getId());
+            dto.setOriginalName(entity.getOriginalName());
+            dto.setSize(entity.getSize());
+            dto.setUrl(getImageUrl(entity.getId()));
+
+            dtoList.add(dto);
+        });
+        return new PageImpl(dtoList,pageable, all.getTotalElements());
+
     }
 }

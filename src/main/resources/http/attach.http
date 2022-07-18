@@ -2,12 +2,17 @@ POST http://localhost:8080/attach/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="lambo.jpg"
+Content-Disposition: form-data; name="file"; filename="newPhoto.jpg"
 
-< C:\Users\mjava\Desktop\Lambo.jpg
+< C:\Users\mjava\Desktop\earth.jpg
 ###
 GET http://localhost:8080/attach/open_general/95db2af7-6378-4973-a3d2-80b8f9e766ea
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc2MTMyNjYsImV4cCI6MTY1NzYxNjg2NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ.XYCUCOyAa9xqdheCCvRVf8U5cliMpbqauM0f9Ind1KY
 
 ###
-DELETE http://localhost:8080/attach/delete/31e49277-005d-48df-a027-6ed1327529ce.jpg
+DELETE http://localhost:8080/attach/adm/delete/814faeaf-40e9-47e1-9fc3-c8c9ad3a9d4c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MjQ5ODQsImV4cCI6MTY1NzkyODU4NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.c9JVCsM4OOHmX3sz6pZuTK13vZHMG0Er1O98IncXvBs
+
+###
+GET http://localhost:8080/attach/adm/get?page=2&size=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MjQ5ODQsImV4cCI6MTY1NzkyODU4NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.c9JVCsM4OOHmX3sz6pZuTK13vZHMG0Er1O98IncXvBs

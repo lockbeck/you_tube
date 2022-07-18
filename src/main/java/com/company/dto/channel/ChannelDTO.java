@@ -1,5 +1,6 @@
-package com.company.dto;
+package com.company.dto.channel;
 
+import com.company.dto.AttachDTO;
 import com.company.dto.profile.ProfileDTO;
 import com.company.enums.ChanelStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -26,5 +27,7 @@ public class ChannelDTO {
     private ProfileDTO profile;
 
     private String photoId;
+    private String photoUrl;
     private String bannerId;
+    private String bannerUrl;
 }

@@ -1,5 +1,6 @@
 package com.company.entity;
 
+import com.company.entity.base.BaseIdEntity;
 import com.company.enums.ProfileRole;
 import com.company.enums.ProfileStatus;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "profile")
 @NoArgsConstructor
 
-public class ProfileEntity {
+public class ProfileEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -46,4 +47,5 @@ public class ProfileEntity {
     public ProfileEntity(Integer id) {
         this.id = id;
     }
+
 }

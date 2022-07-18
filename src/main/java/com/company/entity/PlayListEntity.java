@@ -17,8 +17,9 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PlayListEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
 
     @Column(nullable = false)
     private String name;
@@ -35,6 +36,9 @@ public class PlayListEntity {
 
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
+
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate = LocalDateTime.now();
     @Column
     private Boolean visible = Boolean.TRUE;
     

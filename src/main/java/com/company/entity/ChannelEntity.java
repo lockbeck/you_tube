@@ -31,7 +31,7 @@ public class ChannelEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private ChanelStatus status;
+    private ChanelStatus status =ChanelStatus.ACTIVE;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
@@ -50,4 +50,7 @@ public class ChannelEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private ProfileEntity profile;
 
+    public ChannelEntity(String id) {
+        this.id = id;
+    }
 }

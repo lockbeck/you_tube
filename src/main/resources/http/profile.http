@@ -1,17 +1,60 @@
-POST localhost:8080/profile/create
+POST http://localhost:8080/profile/adm/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcxMDAxMTQsImV4cCI6MTY1NzEwMzcxNCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoyfQ._iZLsLtkm_aw7U24JJrt1ohMCRg53FUrnFdD8DMmD-0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MTE3MzksImV4cCI6MTY1NzkxNTMzOSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.A7pMFhEWJQCMEFWsUlOllpEBgkCA5FGjU4nOjLfSkSQ
 
 {
-  "username": "lockbeck",
-  "email": "t.lochin.98@gmail.com",
-  "password": "123"
+  "username": "user4",
+  "email": "user4@gmail.com",
+  "password": "444",
+  "role": "ROLE_PROFILE"
 }
 ###
-POST http://localhost:8080/aut/login
+POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
   "username": "",
   "password": "123"
 }
+###
+POST http://localhost:8080/profile/public/changePass
+Content-Type: application/json
+
+{
+  "username": "user4",
+  "oldPassword": "newEmail@gmail.com",
+  "newPassword": "111",
+  "newConfirmedPassword": "111"
+}
+
+###
+POST http://localhost:8080/profile/public/changeEmail
+Content-Type: application/json
+
+{
+  "username": "user3",
+  "email": "t.lochin.98@gmail.com",
+  "password": "333"
+}
+
+###
+POST http://localhost:8080/profile/public/changeUsername
+Content-Type: application/json
+
+{
+  "username": "user3",
+  "newUsername": "lock"
+}
+
+###
+POST http://localhost:8080/profile/public/changeImage
+Content-Type: application/json
+
+{
+  "username": "lock",
+  "attachId": "671eff04-0ad8-47bf-9f7f-5dfc14123af7"
+}
+
+###
+GET http://localhost:8080/profile/adm/getInfo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc5MjQ5ODQsImV4cCI6MTY1NzkyODU4NCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoxfQ.c9JVCsM4OOHmX3sz6pZuTK13vZHMG0Er1O98IncXvBs

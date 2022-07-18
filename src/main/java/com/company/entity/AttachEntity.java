@@ -3,6 +3,7 @@ package com.company.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "attach")
 @NoArgsConstructor
+@ToString
 
 public class AttachEntity {
 

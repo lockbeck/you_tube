@@ -63,17 +63,6 @@ public class AuthService {
         emailService.sendRegistrationEmail(entity.getEmail(), entity.getId());
 
         return "Activation code was sent to " + dto.getEmail();
-
-//        ProfileDTO profileDTO = new ProfileDTO();
-//        profileDTO.setId(entity.getId());
-//        profileDTO.setUsername(entity.getUsername());
-//        profileDTO.setEmail(entity.getEmail());
-//        profileDTO.setRole(entity.getRole());
-//        profileDTO.setCreatedDate(entity.getCreatedDate());
-//        return  profileDTO;
-
-
-
     }
 
     public ProfileDTO login(LoginDTO dto) {

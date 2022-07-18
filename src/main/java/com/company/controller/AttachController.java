@@ -5,6 +5,9 @@ import com.company.service.AttachService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +23,7 @@ public class AttachController {
     @PostMapping("/upload")
     public ResponseEntity<AttachDTO> upload(@RequestParam("file") MultipartFile file) {
         log.info("Request for upload media {}",file);
-         AttachDTO response = attachService.saveToSystem(file);
+        AttachDTO response = attachService.saveToSystem(file);
         return ResponseEntity.ok().body(response);
     }
 
@@ -39,12 +42,6 @@ public class AttachController {
         return null;
     }
 
-    @GetMapping(value = "/open_general/{id}", produces = MediaType.ALL_VALUE)
-    public byte[] open_general(@PathVariable("id") String fileName) {
-        log.info("Request for open_general media {}",fileName);
-        return attachService.loadImage(fileName);
-    }
-
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> download(@PathVariable("fileName") String fileName) {
         log.info("Request for download media {}",fileName);
@@ -57,11 +54,19 @@ public class AttachController {
 
 
 
-    @DeleteMapping("/delete/{fileName}")
+    @DeleteMapping("/adm/delete/{fileName}")
     public ResponseEntity<String> delete(@PathVariable("fileName") String fileName) {
         log.info("Request for delete media {}",fileName);
         String response = attachService.delete(fileName);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("adm/get")
+    public ResponseEntity<?>getAll(@RequestParam(value = "page",defaultValue = "0")int page,
+                                   @RequestParam(value = "size",defaultValue = "4")int size){
+        log.info("Request to get all attach for Admin");
+        PageImpl all = attachService.getAll(page, size);
+        return ResponseEntity.ok(all);
     }
 
 
